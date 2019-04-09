@@ -12,33 +12,43 @@
     <!-- Title Page-->
     <title>{{ $modx->documentObject['pagetitle'] }}</title>
 
+
+
+{{--    {!! $modx->runSnippet('MinifyX', [
+    'CSSfile' => 'theme/assets/vendor/bootstrap-4.1/bootstrap.min.css',
+    'cssCompress' => '1',
+    'outFolder' => 'assets/templates/',
+    'outCSS' => 'prod.min.css',
+    ]) !!}--}}
+
     <!-- Icons font CSS-->
-    <link href="assets/templates/homeartidea/assets/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="assets/templates/homeartidea/assets/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="assets/templates/homeartidea/assets/vendor/themify-font/themify-icons.css" rel="stylesheet" media="all">
+    <link href="theme/assets/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="theme/assets/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="theme/assets/vendor/themify-font/themify-icons.css" rel="stylesheet" media="all">
     <!-- Base fonts of theme-->
-    <link href="assets/templates/homeartidea/assets/css/poppins-font.min.css" rel="stylesheet" media="all">
+    <link href="theme/assets/css/poppins-font.min.css" rel="stylesheet" media="all">
     <!-- Font special for pages-->
 
     <!-- Bootstrap CSS-->
-    <link href="assets/templates/homeartidea/assets/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="theme/assets/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    {{--<link href="assets/templates/prod.min.css" rel="stylesheet" media="all">--}}
 
     <!-- Vendor CSS-->
-    <link href="assets/templates/homeartidea/assets/vendor/animate.css/animate.min.css" rel="stylesheet" media="all">
-    <link href="assets/templates/homeartidea/assets/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="assets/templates/homeartidea/assets/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="assets/templates/homeartidea/assets/vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="assets/templates/homeartidea/assets/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="assets/templates/homeartidea/assets/vendor/revolution/css/layers.css" rel="stylesheet" />
-    <link href="assets/templates/homeartidea/assets/vendor/revolution/css/navigation.css" rel="stylesheet" />
-    <link href="assets/templates/homeartidea/assets/vendor/revolution/css/settings.css" rel="stylesheet" />
+    <link href="theme/assets/vendor/animate.css/animate.min.css" rel="stylesheet" media="all">
+    <link href="theme/assets/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="theme/assets/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="theme/assets/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="theme/assets/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="theme/assets/vendor/revolution/css/layers.css" rel="stylesheet" />
+    <link href="theme/assets/vendor/revolution/css/navigation.css" rel="stylesheet" />
+    <link href="theme/assets/vendor/revolution/css/settings.css" rel="stylesheet" />
 
     <!-- Main CSS-->
-    <link href="assets/templates/homeartidea/assets/css/main.min.css" rel="stylesheet" media="all">
-    <link href="assets/templates/homeartidea/assets/rediz/css/main.css" rel="stylesheet">
+    <link href="theme/assets/css/main.min.css" rel="stylesheet" media="all">
+    <link href="theme/assets/rediz/css/main.css" rel="stylesheet">
 
     <!--Favicons-->
-    <link rel="shortcut icon" href="assets/templates/homeartidea/assets/rediz/img/logo_red.png">
+    <link rel="shortcut icon" href="theme/assets/rediz/img/logo_red.png">
 
 </head>
 
@@ -62,19 +72,18 @@
                                 <div class="container">
                                     <div class="row no-gutters">
                                         <div class="col-lg-4 col-12 header-contact-flex">
-                                            <a class="header-contact" href="tel:79261061690"><i class="zmdi zmdi-phone"></i> +7 (926) 106 16 90</a>
+                                            <a class="header-contact" href="tel:{{ $modx->getConfig('client_phone') }}"><i class="zmdi zmdi-phone"></i> {{ $modx->getConfig('client_phone') }}</a>
                                         </div>
                                         <div class="col-lg-8 col-0 header-contact-menu">
                                             <nav class="header-content-center_main-menu">
-                                                <ul class="snip1135">
-                                                    <li class="current"><a href="#" data-hover="Главная">Главная</a></li>
-                                                    <li><a href="#" data-hover="О нас">О нас</a></li>
-                                                    <li><a href="#" data-hover="Услуги">Услуги</a></li>
-                                                    <li><a href="#" data-hover="Комлектация интерьера">Комлектация интерьера</a></li>
-                                                    <li><a href="#" data-hover="Портфолио">Портфолио</a></li>
-                                                    <li><a href="#" data-hover="Сотрудничество">Сотрудничество</a></li>
-                                                    <li><a href="#" data-hover="Контакты">Контакты</a></li>
-                                                </ul>
+                                                    {!! $modx->runSnippet('DLMenu',[
+                                                        'parents' => '0',
+                                                        'outerTpl' => '@CODE:<ul class="snip1135">[+wrap+]</ul>',
+                                                        'rowTpl' => '@CODE:<li[+classes+]><a href="[+url+]" data-hover="[+title+]">[+title+]</a></li>',
+                                                        'maxDepth' => '1',
+                                                        'showParent' => '1',
+                                                        'hereClass' => 'current'
+                                                    ]) !!}
                                             </nav>
 
                                         </div>
@@ -99,43 +108,28 @@
             </a>
             <div class="menu-sidebar__content">
                 <nav class="menu-sidebar-nav-menu">
-                    <ul class="menu nav-menu" id="nav-menu-sidebar">
-                        <li class="menu-item menu-item-has-children">
-                            <a href="#" data-toggle="collapse" data-target="#sub1" aria-expanded="true" aria-controls="sub1">Главная</a>
-                            <ul class="sub-menu collapse" id="sub1" data-parent="#nav-menu-sidebar">
-                                <li class="menu-item"><a href="#1">Item 1</a></li>
-                                <li class="menu-item"><a href="#2">Item 2</a></li>
-                                <li class="menu-item"><a href="#3">Item 3</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item"><a href="#">О нас</a></li>
-                        <li class="menu-item menu-item-has-children">
-                            <a href="#" data-toggle="collapse" data-target="#sub2" aria-expanded="true" aria-controls="sub2">Услуги</a>
-                            <ul class="sub-menu collapse" id="sub2" data-parent="#nav-menu-sidebar">
-                                <li class="menu-item"><a href="#1">Service 1</a></li>
-                                <li class="menu-item"><a href="#2">Service 2</a></li>
-                                <li class="menu-item"><a href="#3">Service 3</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item"><a href="#">Комплектация интерера</a></li>
-                        <li class="menu-item"><a href="#">Портфолио</a></li>
-                        <li class="menu-item"><a href="#">Дизайнерам архитекторам</a></li>
-                        <li class="menu-item"><a href="#">Контакты</a></li>
-                    </ul>
+                    {!! $modx->runSnippet('DLMenu',[
+                        'parents' => '0',
+                        'outerTpl' => '@CODE:<ul class="menu nav-menu" id="nav-menu-sidebar">[+wrap+]</ul>',
+                        'rowTpl' => '@CODE:<li[+classes+]><a href="[+url+]">[+title+]</a></li>',
+                        'maxDepth' => '2',
+                        'showParent' => '1',
+                        'hereClass' => 'current'
+                    ]) !!}
                 </nav>
                 <ul class="list-social list-social--big">
                     <li class="list-social__item">
-                        <a class="ic-fb" href="#">
+                        <a class="ic-fb" href="{{ $modx->getConfig('client_facebook') }}">
                             <i class="zmdi zmdi-facebook"></i>
                         </a>
                     </li>
                     <li class="list-social__item">
-                        <a class="ic-insta" href="#">
+                        <a class="ic-insta" href="{{ $modx->getConfig('client_instagram') }}">
                             <i class="zmdi zmdi-instagram"></i>
                         </a>
                     </li>
                     <li class="list-social__item">
-                        <a class="ic-ytb" href="#">
+                        <a class="ic-ytb" href="{{ $modx->getConfig('client_youtube') }}">
                             <i class="zmdi zmdi-youtube-play"></i>
                         </a>
                     </li>
@@ -144,7 +138,7 @@
             </div>
             <div class="menu-sidebar__footer">
                 <div class="copyright">
-                    <p>© 2019 HOMEARTIDEA</p>
+                    <p>{{ $modx->getConfig('client_copyright') }}</p>
                 </div>
             </div>
         </aside>
@@ -208,23 +202,23 @@
                         <div class="page-info__inner">
                             <ul class="list-social list-social-2 list-social--ver">
                                 <li class="list-social__item">
-                                    <a class="ic-fb" href="#facebook">
+                                    <a class="ic-fb" href="{{ $modx->getConfig('client_facebook') }}">
                                         <i class="zmdi zmdi-facebook"></i>
                                     </a>
                                 </li>
                                 <!--.-->
                                 <li class="list-social__item">
-                                    <a class="ic-insta" href="#instagram">
+                                    <a class="ic-insta" href="{{ $modx->getConfig('client_instagram') }}">
                                         <i class="zmdi zmdi-instagram"></i>
                                     </a>
                                 </li>
                                 <li class="list-social__item">
-                                    <a class="ic-ytb" href="#youtube">
+                                    <a class="ic-ytb" href="{{ $modx->getConfig('client_youtube') }}">
                                         <i class="zmdi zmdi-youtube-play"></i>
                                     </a>
                                 </li>
                             </ul>
-                            <div class="copyright">© 2019 HOMEARTIDEA</div>
+                            <div class="copyright">{{ $modx->getConfig('client_copyright') }}</div>
                         </div>
                     </div>
                 </div>
@@ -250,9 +244,9 @@
                              data-rev-voffbullet="40"
                              data-rev-spacebullet="30">
                             <ul>
-
-                                <li class="rev-item rev-item-1" data-transition="slotzoom-horizontal" data-param1="">
-                                    <img class="rev-slidebg" src="assets/templates/homeartidea/assets/rediz/img/main-slider-1.jpg" alt="HOMEARTIDEA"
+                                {{--data-transition="slotzoom-horizontal"--}}
+                                <li class="rev-item rev-item-1" data-transition="3dcurtain-vertical" data-param1="">
+                                    <img class="rev-slidebg" src="theme/assets/rediz/img/main-slider-1.jpg" alt="HOMEARTIDEA"
                                          data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" />
                                     <h2 class="tp-caption tp-resizeme rev-text-1"
                                         data-frames='[{"delay":0,"speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
@@ -305,7 +299,7 @@
                                 </li>
 
                                 <li class="rev-item rev-item-2" data-transition="3dcurtain-vertical" data-param1="">
-                                    <img class="rev-slidebg" src="assets/templates/homeartidea/assets/rediz/img/main-slider-2.jpg" alt="Комплектация интерьера под Ваш бюджет"
+                                    <img class="rev-slidebg" src="theme/assets/rediz/img/main-slider-2.jpg" alt="Комплектация интерьера под Ваш бюджет"
                                          data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" />
                                     <h2 class="tp-caption tp-resizeme rev-text-1"
                                         data-frames='[{"delay":0,"speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
@@ -358,7 +352,7 @@
                                 </li>
 
                                 <li class="rev-item rev-item-3" data-transition="3dcurtain-vertical" data-param1="">
-                                    <img class="rev-slidebg" src="assets/templates/homeartidea/assets/rediz/img/main-slider-3.jpg" alt="3"
+                                    <img class="rev-slidebg" src="theme/assets/rediz/img/main-slider-3.jpg" alt="3"
                                          data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" />
                                     <h2 class="tp-caption tp-resizeme rev-text-1"
                                         data-frames='[{"delay":0,"speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
@@ -411,7 +405,7 @@
                                 </li>
 
                                 <li class="rev-item rev-item-4" data-transition="3dcurtain-vertical" data-param1="">
-                                    <img class="rev-slidebg" src="assets/templates/homeartidea/assets/rediz/img/main-slider-4.jpg" alt="4"
+                                    <img class="rev-slidebg" src="theme/assets/rediz/img/main-slider-4.jpg" alt="4"
                                          data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" />
                                     <h2 class="tp-caption tp-resizeme rev-text-1"
                                         data-frames='[{"delay":0,"speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
@@ -476,41 +470,41 @@
 </div>
 
 <!-- Jquery JS-->
-<script src="assets/templates/homeartidea/assets/vendor/jquery/jquery.min.js"></script>
+<script src="theme/assets/vendor/jquery/jquery.min.js"></script>
 <!-- Bootstrap JS-->
-<script src="assets/templates/homeartidea/assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+<script src="theme/assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>
 <!-- Vendor JS-->
-<script src="assets/templates/homeartidea/assets/vendor/animsition/animsition.min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/slick/slick.min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/wow/wow.min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/jquery.counterup/jquery.counterup.min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/isotope/isotope.pkgd.min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/isotope/imagesloaded.pkgd.min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/matchHeight/jquery.matchHeight-min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/select2/select2.min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/sweetalert/sweetalert.min.js"></script>
-<script src="assets/templates/homeartidea/assets/vendor/noUiSlider/nouislider.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/jquery.themepunch.tools.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/jquery.themepunch.revolution.min.js"></script>
+<script src="theme/assets/vendor/animsition/animsition.min.js"></script>
+<script src="theme/assets/vendor/slick/slick.min.js"></script>
+<script src="theme/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="theme/assets/vendor/wow/wow.min.js"></script>
+<script src="theme/assets/vendor/jquery.counterup/jquery.counterup.min.js"></script>
+<script src="theme/assets/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="theme/assets/vendor/isotope/imagesloaded.pkgd.min.js"></script>
+<script src="theme/assets/vendor/matchHeight/jquery.matchHeight-min.js"></script>
+<script src="theme/assets/vendor/select2/select2.min.js"></script>
+<script src="theme/assets/vendor/sweetalert/sweetalert.min.js"></script>
+<script src="theme/assets/vendor/noUiSlider/nouislider.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/jquery.themepunch.revolution.min.js"></script>
 <!--
 | (Load Extensions only on Local File Systems !
 | The following part can be removed on Server for On Demand Loading)
 -->
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/extensions/revolution.extension.video.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/extensions/revolution.extension.migration.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-<script type="text/javascript" src="assets/templates/homeartidea/assets/vendor/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/extensions/revolution.extension.video.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script type="text/javascript" src="theme/assets/vendor/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
 <!-- Config Revolution Slider-->
-<script type="text/javascript" src="assets/templates/homeartidea/assets/js/config-revolution.min.js"></script>
+<script type="text/javascript" src="theme/assets/js/config-revolution.min.js"></script>
 
 <!-- Main JS-->
-<script src="assets/templates/homeartidea/assets/js/global.js"></script>
+<script src="theme/assets/js/global.js"></script>
 
 </body>
 

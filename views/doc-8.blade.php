@@ -1,8 +1,5 @@
-@extends('layouts.base')
+@extends('tpl-4')
 
-@section('header')
-    @include('partials.base_header')
-@endsection
 
 @section('main')
 
@@ -17,19 +14,17 @@
 
                 {!!  $modx->documentObject['content'] !!}
 
+                <div class="grid">
+                    {!!  $modx->runSnippet('DocLister',[
+                       'parents' => '8',
+                       'tvList' => 'category_img',
+                       'tpl' => 'tpl_categories',
+                       'sortType' => 'other',
+                        'orderBy' => 'menuindex ASC'
+                       ]) !!}
+                </div>
             </div>
         </div>
     </section>
 
-@endsection
-
-@section('form')
-    @include('partials.universal_form', [
-    'title' => 'Есть вопросы?',
-    'description' => 'Мы ценим ваше время и стремимся максимально быстро и качественно предоставить ответ на ваш вопрос.'
-    ])
-@endsection
-
-@section('footer')
-    @include('partials.base_footer')
 @endsection

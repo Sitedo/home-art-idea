@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.category')
 
 @section('header')
     @include('partials.base_header')
@@ -12,11 +12,8 @@
         <div class="row">
             <div class="col-12 mt-4 mb-5">
                 <h1 class="title--1">{{ $modx->documentObject['longtitle'] }}</h1>
-                <p class="text--1">{{ $modx->documentObject['description'] }}</p>
                 <div class="red--underline"></div>
-
                 {!!  $modx->documentObject['content'] !!}
-
             </div>
         </div>
     </section>
