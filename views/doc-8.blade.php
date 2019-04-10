@@ -20,7 +20,7 @@
                        'tvList' => 'category_img',
                        'tpl' => 'tpl_categories',
                        'sortType' => 'other',
-                        'orderBy' => 'menuindex ASC'
+                       'orderBy' => 'menuindex ASC'
                        ]) !!}
                 </div>
             </div>

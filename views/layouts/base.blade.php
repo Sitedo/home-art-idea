@@ -30,7 +30,8 @@
     <link href="theme/assets/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
     <!--FancyBox-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-
+    <!--Slick-->
+    <link rel="stylesheet" href="theme/assets/vendor/slick/slick.css" />
 
     <!-- Main CSS-->
     <link href="theme/assets/css/main.min.css" rel="stylesheet" media="all">
@@ -74,15 +75,19 @@
     <!-- END FOOTER-->
 </div>
 
+
 <!-- Jquery JS-->
 <script src="theme/assets/vendor/jquery/jquery.min.js"></script>
 <!-- Bootstrap JS-->
 <script src="theme/assets/vendor/bootstrap-4.1/bootstrap.min.js"></script>
 <!--FancyBox-->
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-
+<!--Slick-->
+<script src="theme/assets/vendor/slick/slick.min.js"></script>
 <!-- Main JS-->
 <script src="theme/assets/js/global.js"></script>
+<!-- MyMain JS-->
+<script src="theme/assets/rediz/js/main.js"></script>
 
 </body>
 
